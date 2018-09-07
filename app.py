@@ -1,6 +1,5 @@
 from firebase import firebase
 from flask import Flask
-from .forms import FirePut
 
 app = Flask(__name__)
 
