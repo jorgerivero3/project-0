@@ -1,7 +1,5 @@
 from firebase import firebase
-from flask import Flask
-
-firebase = firebase.FirebaseApplication('https://project-0-1a188.firebaseio.com', authentication=None)
+from app import f
 result = firebase.get('/users', None, {'print': 'pretty'})
 print result
 
@@ -15,9 +13,4 @@ print user.firebase_auth_token
 
 result = firebase.get('/users', None, {'print': 'pretty'})
 print result
-
-@app.route('/login')
-def login(): 
-	return "<h1>This is the login page!</h1>"
-
 
