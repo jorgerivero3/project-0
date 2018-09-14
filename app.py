@@ -32,5 +32,13 @@ def login():
 		return redirect(url_for('index'))
 	return render_template('login.html', title="Login", form=form)
 
+@app.route("/password_retrieval")
+def passretrieval(): #need a form
+	return render_template("password_retrieval.html", title="Get your password back")
+
+@app.route("/ads")
+def ads():
+	return render_template("ads.html", title="SALES WOW")
+
 if __name__ == '__main__':
 	app.run(debug=True)
