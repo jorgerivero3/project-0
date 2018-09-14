@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <!--  Meta  -->
+  <meta charset="UTF-8" />
+  <title>SomethingList</title>
+  
+  <!--  Styles  -->
+  <link rel="stylesheet" href="./static/style.css">
+  <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/rawline" type="text/css"/>
+  <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/glacial-indifference" type="text/css"/>
+</head>
+<body>
+  {% block content %}
+  <h3>Create an account</h3>
+  <div class='theForm'>
+        <form action="/register/submit" method="POST" enctype="text/plain">
+            {{ form.hidden_tag() }}
+            <fieldset class='form-group'>
+              <legend class='border-bottom mb-4'>Join Today</legend>
+              <dir>
+                {{ form.username.label(class='form-control-label') }}
+                {{ form.username(class='form-control form-control-lg') }}
+              </dir>
+              <dir>
+                {{ form.email.label(class='form-control-label') }}
+                {{ form.email(class='form-control form-control-lg') }}
+              </dir>
+              <dir>
+                {{ form.password.label(class='form-control-label') }}
+                {{ form.password(class='form-control form-control-lg') }}
+              </dir>
+              <dir>
+                {{ form.confirm_password.label(class='form-control-label') }}
+                {{ form.confirm_password(class='form-control form-control-lg') }}
+              </dir>
+            </fieldset>
+            <div class="form-group">
+              {{ form.submit(class="btn btn-outline-info") }}
+   
+            </div>
+        </form>
+  </div>
+  <div class="border-top pt-3">
+    <small class="text-muted">
+      Already have an account? <a class="ml-2" href="{{ url_for('login') }}">Sign In</a>
+    </small>
+  </div>
+  <script src="scripts/index.js"></script>
+  {% endblock content %}
+</body>
+</html>
