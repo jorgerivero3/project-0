@@ -2,8 +2,6 @@ from forms import RegistrationForm, LoginForm
 from flask import Flask, render_template, url_for, flash, redirect, request
 from flask_login import LoginManager
 
-firebase = firebase.FirebaseApplication('https://project-0-1a188.firebaseio.com', authentication=None)
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'c435bd07880364149cdf9661f1994db4'
 login_manager = LoginManager(app)
@@ -18,7 +16,6 @@ def index():
 def register():
 	form = RegistrationForm()
 	if request.method == "POST":
-		user = firebase.post('/Users', form.username.data, form.email.data, form.password.data)
 		print(user)
 		return redirect(index)
 	return render_template("register.html", title="Register", form=form)
