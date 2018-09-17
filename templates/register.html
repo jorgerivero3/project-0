@@ -7,47 +7,53 @@
   <title>SomethingList</title>
   
   <!--  Styles  -->
-  <link rel="stylesheet" href="./static/style.css">
+  <!-- <link type="text/css" rel="stylesheet" href="../static/style.css" /> -->
+  <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='style.css') }}" />
   <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/rawline" type="text/css"/>
   <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/glacial-indifference" type="text/css"/>
 </head>
+
 <body>
   {% block content %}
   <h3>Create an account</h3>
   <div class='theForm'>
         <form action="/register" method="POST" enctype="text/plain">
             {{ form.hidden_tag() }}
-            <fieldset class='form-group'>
-              <legend class='border-bottom mb-4'>Join Today</legend>
-              <dir>
-                {{ form.username.label(class='form-control-label') }}
-                {{ form.username(class='form-control form-control-lg') }}
-              </dir>
-              <dir>
-                {{ form.email.label(class='form-control-label') }}
-                {{ form.email(class='form-control form-control-lg') }}
-              </dir>
-              <dir>
-                {{ form.password.label(class='form-control-label') }}
-                {{ form.password(class='form-control form-control-lg') }}
-              </dir>
-              <dir>
-                {{ form.confirm_password.label(class='form-control-label') }}
-                {{ form.confirm_password(class='form-control form-control-lg') }}
-              </dir>
-            </fieldset>
+
+              <!-- hey jorge html5 doesnt support dir tags so i removed em -->
+
+              <ul>
+                <!-- {{ form.username.label(class='form-control-label') }} -->
+                {{ form.username(class='form-control form-control-lg', placeholder='Username') }}
+              </ul>
+                
+              <ul>
+                <!-- {{ form.email.label(class='form-control-label') }} -->
+                {{ form.email(class='form-control form-control-lg', placeholder='Email') }}
+              </ul>
+              <ul>
+                <!-- {{ form.password.label(class='form-control-label') }} -->
+                {{ form.password(class='form-control form-control-lg', placeholder='Password') }}
+              </ul>
+              <ul>
+                <!-- {{ form.confirm_password.label(class='form-control-label') }} -->
+                {{ form.confirm_password(class='form-control form-control-lg', placeholder='Confirm password') }}
+              </ul>
+           
             <div class="form-group">
-              {{ form.submit(class="btn btn-outline-info") }}
+
+              <!-- {{ form.submit(class="button") }} -->
+              <button class='button' onclick='pressRegister()' type='submit'>Register</button>
    
             </div>
         </form>
-  </div>
-  <div class="border-top pt-3">
-    <small class="text-muted">
-      Already have an account? <a class="ml-2" href="{{ url_for('login') }}">Sign In</a>
+  <!-- </div> -->
+  <!-- <div class="border-top pt-3"> -->
+    <small>
+      Already have an account? <a class="ml-2" href="{{ url_for('login') }}">Login</a>
     </small>
   </div>
-  <script src="scripts/index.js"></script>
+  <script src="./static/script.js"></script>
   {% endblock content %}
 </body>
 </html>

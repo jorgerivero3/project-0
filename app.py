@@ -6,6 +6,11 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'c435bd07880364149cdf9661f1994db4'
 login_manager = LoginManager(app)
 
+# this is just clearing the template cache so html/css changes actually render
+def before_request():
+	app.jinja_env.cache = {}
+
+app.before_request(before_request)
 
 @app.route('/')
 def index():
@@ -39,4 +44,6 @@ def ads():
 	return render_template("ads.html", title="SALES WOW")
 
 if __name__ == '__main__':
+	app.config['TEMPLATES_AUTO_RELOAD'] = True
+	app.jinja_env.auto_reload = True
 	app.run(debug=True)

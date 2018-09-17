@@ -5,7 +5,8 @@
   <meta charset="UTF-8" />
   <title>SomethingList</title>
   
-  <link rel="stylesheet" href="./static/style.css">
+  <!-- <link rel="stylesheet" href="../static/style.css"> -->
+  <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='style.css') }}" />
   <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/rawline" type="text/css"/>
   <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/glacial-indifference" type="text/css"/>
 </head>
@@ -19,18 +20,18 @@
         <!-- add routing stuff -->
         <form method ="get" action = "/login"><button class ='button'>Login</button></form>
         
-        <p>or <a href="/ads">Continue as Guest</a></p>
+        <p class='align-text-center'>or <a href="/ads">Continue as Guest</a></p>
 
 
 
      </div>
      <div class='right-body'>
         <!-- feed goes here -->
-        <p>feed</p>
+        <p>feeeed</p>
      </div>
   </div>
   
  
-  <script src="scripts/index.js"></script>
+  <script src="./static/script.js"></script>
 </body>
 </html>
