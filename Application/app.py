@@ -23,9 +23,17 @@ def index():
 @app.route("/register", methods=['GET', "POST"])
 def register():
 	form = RegistrationForm()
-	if request.method == "POST":
+	print("Hello")
+	if form.validate_on_submit():
+		print("valid")
+		hashed_password = Bcrypt.generate_password_hash(form.password.data).decode("utf-8")
+		user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+		db.session.add(user)
+		db.session.commit()
 		print(user)
-		return redirect(index)
+		flash(f"Account created! You are now able to login", "success")
+		return redirect(url_for('index'))
+	print("new")
 	return render_template("register.html", title="Register", form=form)
 
 
