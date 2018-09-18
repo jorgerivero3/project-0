@@ -1,3 +1,6 @@
+# CONSIDER REDOING THIS FILE AS NAME CONFLICTS WITH VARIABLE AND
+# WE ARE ALSO RESTRUCTURING TO USE AS A PACKAGE
+
 from forms import RegistrationForm, LoginForm
 from flask import Flask, render_template, url_for, flash, redirect, request
 from flask_login import LoginManager
