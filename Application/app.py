@@ -1,7 +1,7 @@
 # CONSIDER REDOING THIS FILE AS NAME CONFLICTS WITH VARIABLE AND
 # WE ARE ALSO RESTRUCTURING TO USE AS A PACKAGE
 
-from forms import RegistrationForm, LoginForm
+from forms import RegistrationForm, LoginForm, newItem
 from flask import Flask, render_template, url_for, flash, redirect, request
 from flask_login import LoginManager
 
@@ -14,6 +14,7 @@ def before_request():
 	app.jinja_env.cache = {}
 
 app.before_request(before_request)
+
 
 @app.route('/')
 def index():
@@ -53,6 +54,7 @@ def passretrieval(): #need a form
 @app.route("/ads")
 def ads():
 	return render_template("ads.html", title="SALES WOW")
+
 
 if __name__ == '__main__':
 	app.config['TEMPLATES_AUTO_RELOAD'] = True
