@@ -1,7 +1,7 @@
 # CONSIDER REDOING THIS FILE AS NAME CONFLICTS WITH VARIABLE AND
 # WE ARE ALSO RESTRUCTURING TO USE AS A PACKAGE
 
-from forms import RegistrationForm, LoginForm
+from forms import RegistrationForm, LoginForm, newItem
 from flask import Flask, render_template, url_for, flash, redirect, request
 from flask_login import LoginManager
 
@@ -41,6 +41,11 @@ def login():
 @app.route("/password_retrieval")
 def passretrieval(): #need a form
 	return render_template("password_retrieval.html", title="Get your password back")
+
+@app.route("/newItem")
+def itemListing():
+	form = newItem()
+	return render_template("newItem.html", title="New Item Listing", form=form)
 
 @app.route("/ads")
 def ads():
