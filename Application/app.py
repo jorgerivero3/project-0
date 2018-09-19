@@ -24,7 +24,7 @@ def index():
 @app.route("/register", methods=['GET', "POST"])
 def register():
 	form = RegistrationForm()
-	print("Hello")
+	print(form.data)
 	if form.validate_on_submit():
 		print("valid")
 		hashed_password = Bcrypt.generate_password_hash(form.password.data).decode("utf-8")

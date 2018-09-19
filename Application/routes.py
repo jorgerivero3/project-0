@@ -4,6 +4,10 @@ from Application.forms import RegistrationForm, LoginForm
 from Application.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 
+def before_request():
+	app.jinja_env.cache = {}
+
+app.before_request(before_request)
 
 @app.route('/')
 def index():
@@ -15,6 +19,7 @@ def register():
 	if current_user.is_authenticated:
 		return redirect(url_for('home'))
 	form = RegistrationForm()
+	print("Register form")
 	if form.validate_on_submit():
 		hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
 		user = User(username=form.username.data, email=form.email.data, password=hashed_password)
