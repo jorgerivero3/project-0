@@ -1,13 +1,14 @@
 from flask import render_template, url_for, flash, redirect, request
-from Application import app
+from Application import app, db, bcrypt
 from Application.forms import RegistrationForm, LoginForm
 from Application.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 
-def before_request():
-	app.jinja_env.cache = {}
-
-app.before_request(before_request)
+#what do these lines do?
+#def before_request():
+#	app.jinja_env.cache = {}
+#
+#app.before_request(before_request)
 
 @app.route('/')
 def index():
