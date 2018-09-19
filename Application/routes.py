@@ -21,8 +21,12 @@ def register():
 	form = RegistrationForm()
 	print("Register form")
 	if form.validate_on_submit():
-		print("Submitted")
-		flash(f'Account created for {form.username.data}!', 'success')
+		hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+		user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+		db.session.add(user)
+		db.session.commit()
+		flash('Account created! You can now log in', 'success')
+		return redirect(url_for('login'))
 	return render_template("register.html", title="Register", form=form)
 
 
