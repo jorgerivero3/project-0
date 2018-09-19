@@ -53,6 +53,7 @@ def itemListing():
 
 
 @app.route("/home")
+@app.route("/ads")
 def home():
 	return render_template("ads.html", title="SALES WOW")
 
