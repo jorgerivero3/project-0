@@ -29,6 +29,7 @@ class LoginForm(FlaskForm):
 	remember = BooleanField("Remember Me")
 	submit = SubmitField('Login')
 
+	
 class newItem(FlaskForm):
 	itemName = StringField("Name of listed item", validators=[DataRequired(), Length(min=2, max=20)])
 	description = TextAreaField("Item description", validators=[DataRequired(), Length(max=750)])
