@@ -3,6 +3,10 @@ from Application import app
 from Application.forms import RegistrationForm, LoginForm
 from Application.models import User, Post
 
+def before_request():
+	app.jinja_env.cache = {}
+
+app.before_request(before_request)
 
 @app.route('/')
 def index():
@@ -12,9 +16,10 @@ def index():
 @app.route("/register", methods=['GET', "POST"])
 def register():
 	form = RegistrationForm()
+	print("Register form")
 	if form.validate_on_submit():
+		print("Submitted")
 		flash(f'Account created for {form.username.data}!', 'success')
-		return redirect(url_for('login'))
 	return render_template("register.html", title="Register", form=form)
 
 
