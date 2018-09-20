@@ -3,14 +3,49 @@
 
   <h3>Login</h3>
   <div class='theForm'>
-        <form action="#" method="post" enctype="text/plain">
-            <input type='email' id='email' name='email' placeholder="Email" /><br/>
-            <input type='password' name='password' placeholder="Password" /><br/>
-            <!-- handle submit later -->
-            <button class='button' onclick='pressSubmit()' type='submit'>Submit</button>
+        <form method="POST" action="/login">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Login</legend>
+                
+                <div class="form-group">
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid", placeholder='Email') }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg", placeholder='Email') }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-lg is-invalid", placeholder='Password') }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form-control form-control-lg", placeholder='Password') }}
+                    {% endif %}
+                </div>
+                
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="button") }}
+            </div>
         </form>
-    <small>Don't have an account? <a href="/register">Register</a></small><br>
-    <small><a href="/password_retrieval">&emsp;&emsp;Forgot your password?</a></small>
+
+
+
+   </div>
+  <!-- <div class="border-top pt-3"> -->
+    <small>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Don't have an account? <a href="/register">Register</a></small><br>
+    <small><a href="/password_retrieval">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Forgot your password?</a></small>
   </div>
-  <script src="scripts/index.js"></script>
-{% endblock %}
+  <script src="./static/script.js"></script>
+  
+  {% endblock content %}
