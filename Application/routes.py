@@ -65,7 +65,7 @@ def itemListing():
 		db.session.commit()
 		flash('Item Listed!', 'success')
 		return redirect(url_for('home'))
-	return render_template("newItem.html", title="New Item Listing", form=form)
+	return render_template("newItem.html", title="New Item Listing", form=form, legend='New Listing')
 
 
 @app.route("/home")
@@ -118,12 +118,37 @@ def post(post_id):
 	return render_template('listing.html', title=post.itemName, post=post)
 
 
-@app.route("/post/<int:post_id>")
+@app.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
 @login_required
 def update_post(post_id):
 	post = Post.query.get_or_404(post_id)
 	if post.author != current_user:
 		abort(403)
-	form = PostForm()
-	return render_template('listing.html', title='update_post', form=form)
+	form = newItem()
+	if form.validate_on_submit():
+		post.itemName = form.itemName.data
+		post.description = form.description.data
+		post.itemPrice = form.itemPrice.data
+		post.itemPic = form.itemPic.data
+		db.session.commit()
+		flash('Post Updated', 'success')
+		return redirect(url_for('post', post_id=post.id))
+	elif request.method == 'GET':
+		form.itemName.data = post.itemName
+		form.description.data = post.description
+		form.itemPrice.data = post.itemPrice
+		form.itemPic.data = post.itemPic
+	return render_template('listing.html', title='update_post', form=form, legend='Update Post')
+
+
+@app.route("/post/<int:post_id>/delete", methods=['POST'])
+@login_required
+def delete_post(post_id):
+	post = Post.query.get_or_404(post_id)
+	if post.author != current_user:
+		abort(403)
+	db.session.delete(post)
+	db.session.commit()
+	flash('Post Deleted', 'success')
+	return redirect(url_for('home'))
 	
