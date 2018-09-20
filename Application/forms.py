@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, IntegerField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, IntegerField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, NumberRange, ValidationError
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from Application.models import User
@@ -56,5 +56,9 @@ class UpdateInfo(FlaskForm):
 			user = User.query.filter_by(email=email.data).first()
 			if user:
 				raise ValidationError('Email taken')
-		
+
+class PostSearchForm(FlaskForm):
+    choices = [('Item', 'Item'), ('User', 'User')]
+    select = SelectField("Search for items: ", choices = choices)
+    search = StringField('')	
 
