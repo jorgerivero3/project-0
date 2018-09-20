@@ -71,7 +71,8 @@ def itemListing():
 @app.route("/home")
 @app.route("/ads")
 def home():
-	posts = Post.query.all()
+	page = request.args.get('page', 1, type=int)
+	posts = Post.query.order_by(Post.date_posted.dsc()).paginate(page=page, per_page=10)
 	return render_template("ads.html", title="SALES WOW", posts=posts)
 
 
