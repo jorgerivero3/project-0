@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  
-  <meta charset="UTF-8" />
-  <title>SomethingList</title>
-  
-  <link rel="stylesheet" href="./static/style.css">
-  <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/rawline" type="text/css"/>
-  <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/glacial-indifference" type="text/css"/>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block content %}
   <div class='theGrid'>
      <div class='left-body'>
         <h1>WELCOME TO ALL OF THE ADS WE DON'T HAVE</h1>
@@ -20,5 +10,5 @@
   
  
   <script src="scripts/index.js"></script>
-</body>
-</html>
+{% endblock %}
+

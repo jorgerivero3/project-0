@@ -1,17 +1,25 @@
 {% extends "layout.html" %}
-{% block concent %}
-<div class="content-section">
-  <form method="POST" action="">
-    {{ form.hidden_tag() }}
-    <fieldset class="form-group">
-      <legend class="border-bottom mb-4">New Listing</legend>
-      <div class="form-group">
-        {{ form.itemName.label(class="form-control-label") }}
-        {% if form.itemName.errors %}
-          {{ form.itemName(class="form-control form-control-lg is-invalid")}}
-          <div class="invalid-feedback">
-    </fieldset>
+{% block content %}
 
+<div class="newListing">
+  <form method="POST" action="">
+    <h2>New Item Listing</h2>
+    {{ form.hidden_tag() }}
+    <h4>Item Name:</h4>
+    {{form.itemName}}
+    <br><br>
+    <h4>Images of item:</h4>
+    {{form.itemPic}}
+    <br><br>
+    <h4>Item description:</h4>
+    {{form.description}}
+    <br><br>
+    <h4>Listing price:</h4>
+    {{form.itemPrice}}
+    <br><br>
+    {{form.submit}}
 
   </form>
+</div>
+
 {% endblock %}
