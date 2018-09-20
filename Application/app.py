@@ -1,7 +1,7 @@
 # CONSIDER REDOING THIS FILE AS NAME CONFLICTS WITH VARIABLE AND
 # WE ARE ALSO RESTRUCTURING TO USE AS A PACKAGE
 
-from forms import RegistrationForm, LoginForm, newItem
+from forms import RegistrationForm, LoginForm, newItem, PostSearchForm
 from flask import Flask, render_template, url_for, flash, redirect, request
 from flask_login import LoginManager
 
@@ -54,6 +54,14 @@ def passretrieval(): #need a form
 @app.route("/ads")
 def ads():
 	return render_template("ads.html", title="SALES WOW")
+	
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    search = PostSearchForm(request.form)
+    if request.method == 'POST':
+        return search_results(search)
+ 
+    return render_template('index.html', form=search)
 
 
 if __name__ == '__main__':

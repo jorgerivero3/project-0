@@ -12,7 +12,7 @@ class User(db.Model, UserMixin):
 	id = db.Column(db.Integer, primary_key=True)
 	username = db.Column(db.String(20), unique=True, nullable=False)
 	email = db.Column(db.String(120), unique=True, nullable=False)
-	image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
+	image_file = db.Column(dp.LargeBinary)
 	password = db.Column(db.String(60), nullable=False)
 	posts = db.relationship('Post', backref='author', lazy=True)
 	admin = db.Column(db.Boolean, unique=False, default=True)
@@ -26,7 +26,7 @@ class Post(db.Model):
 	itemName = db.Column(db.String(100), nullable=False)
 	date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 	itemPrice = db.Column(db.Integer, nullable=False)
-	itemPic = db.Column(db.Text, nullable=False) #i have no idea how to do this one.
+	itemPic = db.Column(dp.LargeBinary)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 	
 	def __repr__(self):
