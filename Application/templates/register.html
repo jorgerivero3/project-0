@@ -1,20 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  
-  <!--  Meta  -->
-  <meta charset="UTF-8" />
-  <title>SomethingList</title>
-  
-  <!--  Styles  -->
-  <!-- <link type="text/css" rel="stylesheet" href="../static/style.css" /> -->
-  <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='style.css') }}" />
-  <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/rawline" type="text/css"/>
-  <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/glacial-indifference" type="text/css"/>
-</head>
+{% extends "layout.html" %}
+{% block content %}
 
-<body>
-  {% block content %}
   <h3>Create an account</h3>
   <div class='theForm'>
         <form method="POST" action="/register">
@@ -85,6 +71,5 @@
     </small>
   </div>
   <script src="./static/script.js"></script>
+  
   {% endblock content %}
-</body>
-</html>

@@ -1,17 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  
-  <!--  Meta  -->
-  <meta charset="UTF-8" />
-  <title>SomethingList</title>
-  
-  <!--  Styles  -->
-  <link rel="stylesheet" href="./static/style.css">
-  <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/rawline" type="text/css"/>
-  <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/glacial-indifference" type="text/css"/>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block content %}
+
   <h3>Login</h3>
   <div class='theForm'>
         <form action="#" method="post" enctype="text/plain">
@@ -24,5 +13,4 @@
     <small><a href="/password_retrieval">&emsp;&emsp;Forgot your password?</a></small>
   </div>
   <script src="scripts/index.js"></script>
-</body>
-</html>
+{% endblock %}

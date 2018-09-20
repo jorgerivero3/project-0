@@ -55,8 +55,8 @@ def passretrieval(): #need a form
 	return render_template("password_retrieval.html", title="Get your password back")
 
 
-@app.route("/newItem", methods=['GET', 'POST'])
-@login_required
+@app.route("/listings/new", methods=['GET', 'POST'])
+# @login_required  <-- just for now -->
 def itemListing():
 	form = newItem()
 	if form.validate_on_submit():
