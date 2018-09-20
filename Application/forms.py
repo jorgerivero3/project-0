@@ -36,8 +36,8 @@ class newItem(FlaskForm):
 	itemName = StringField("Name of listed item", validators=[DataRequired(), Length(min=2, max=20)])
 	description = TextAreaField("Item description", validators=[DataRequired(), Length(max=750)])
 	itemPrice = IntegerField("Price",validators=[DataRequired(), NumberRange(min=0, max=100000)])
-	itemPic = FileField("Image of item", validators=[FileRequired(),
-        FileAllowed(['jpg', 'png'], 'Images only!')])
+	itemPic = FileField("Image of item", validators=[FileRequired(), FileAllowed(['jpg', 'png'], '.jpg and .png only!')])
+	submit = SubmitField('List Item')
 
 
 class UpdateInfo(FlaskForm):

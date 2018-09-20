@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request
 from Application import app, db, bcrypt
-from Application.forms import RegistrationForm, LoginForm, UpdateInfo
+from Application.forms import RegistrationForm, LoginForm, UpdateInfo, newItem
 from Application.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 import secrets
@@ -55,9 +55,13 @@ def passretrieval(): #need a form
 	return render_template("password_retrieval.html", title="Get your password back")
 
 
-@app.route("/newItem")
+@app.route("/newItem", methods=['GET', 'POST'])
+@login_required
 def itemListing():
 	form = newItem()
+	if form.validate_on_submit():
+		flash('Item Listed!', 'success')
+		return redirect(url_for('home'))
 	return render_template("newItem.html", title="New Item Listing", form=form)
 
 
@@ -71,8 +75,6 @@ def home():
 def loutout():
 	logout_user()
 	return redirect(url_for("home"))
-
-
 
 
 @app.route("/account", methods=['GET', 'POST'])

@@ -1,51 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  
-  <!--  Meta  -->
-  <meta charset="UTF-8" />
-  <title>SomethingList</title>
-  
-  <!--  Styles  -->
-  <link rel="stylesheet" href="./static/style.css">
-  <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/rawline" type="text/css"/>
-  <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/glacial-indifference" type="text/css"/>
-</head>
+{% extends "layout.html" %}
+{% block concent %}
+<div class="content-section">
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-4">New Listing</legend>
+      <div class="form-group">
+        {{ form.itemName.label(class="form-control-label") }}
+        {% if form.itemName.errors %}
+          {{ form.itemName(class="form-control form-control-lg is-invalid")}}
+          <div class="invalid-feedback">
+    </fieldset>
 
 
-
-
-<body>
-  {% block content %}
-    <h3>New item listing:</h3>
-
-      <div class='theForm'>
-            <form method="POST" enctype="multipart/form-data">
-              {{ form.hidden_tag()}}
-
-              <!-- Visual information, [itemImages, itemFiles] -->
-                <h4>Images of item:</h4>
-                {{form.itemPic}}<br><br>
-            
-
-            	<!-- Basic infromation, [itemName, description, price] -->
-                <h4>Basic information:</h4>
-                {{ form.itemName}}
-                {{form.description}}
-                <h4>Listing price:</h4>
-                {{form.itemPic}}<br><br>
-
-
-                
-                <!-- handle submit later -->
-                <br><br>
-                <button class='button' onclick='itemList()' type='submit'>Submit</button>
-            </form>
-
-      </div>
-
- {% endblock content %}
-</body>
-
-
-</html>
+  </form>
+{% endblock %}
