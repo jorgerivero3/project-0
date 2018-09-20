@@ -26,7 +26,7 @@ class Post(db.Model):
 	itemName = db.Column(db.String(100), nullable=False)
 	date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 	itemPrice = db.Column(db.Integer, nullable=False)
-	itemPic = db.Column(db.LargeBinary)
+	itemPic = db.Column(db.LargeBinary, nullable=False)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 	
 	def __repr__(self):

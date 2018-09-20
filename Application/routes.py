@@ -56,11 +56,11 @@ def passretrieval(): #need a form
 
 
 @app.route("/listings/new", methods=['GET', 'POST'])
-# @login_required  <-- just for now -->
+@login_required
 def itemListing():
 	form = newItem()
 	if form.validate_on_submit():
-		post = Post(itemName=form.itemName.data, description=form.description.data, itemPrice=form.itemPrice.data, itemPic = form.itemPic, author=current_user)
+		post = Post(itemName=form.itemName.data, description=form.description.data, itemPrice=form.itemPrice.data, itemPic = form.itemPic.read(), author=current_user)
 		db.session.add(post)
 		db.session.commit()
 		flash('Item Listed!', 'success')
