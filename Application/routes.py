@@ -42,7 +42,7 @@ def login():
 	if form.validate_on_submit():
 		user = User.query.filter_by(email=form.email.data).first()
 		if user and bcrypt.check_password_hash(user.password, form.password.data):
-			login_user(uesr, remember=form.remember.data)
+			login_user(user, remember=form.remember.data)
 			next_page = request.args.get('next')
 			return redirect(next_page) if next_page else redirect(url_for('home'))
 		else:
@@ -77,7 +77,7 @@ def home():
 
 
 @app.route("/logout")
-def loutout():
+def logout():
 	logout_user()
 	return redirect(url_for("home"))
 
@@ -105,7 +105,7 @@ def save_picture(form_picture):
 	random_hex = secrets.token_hex(8)
 	_, f_ext = os.path.splitext(form_picture.filename)
 	picture_fn = random_hex + f_ext
-	picture_path = os.path.join(app.root_path, 'statis/profile_pics', picture_fn)
+	picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn)
 	output_size = (125,125)
 	i = Image.open(form_picture)
 	i.thumbnail(output_size)
@@ -146,7 +146,7 @@ def update_post(post_id):
 @login_required
 def delete_post(post_id):
 	post = Post.query.get_or_404(post_id)
-	if post.author != current_user:
+	if (current_user.admin != True) and (post.author != current_user):
 		abort(403)
 	db.session.delete(post)
 	db.session.commit()
