@@ -60,6 +60,9 @@ def passretrieval(): #need a form
 def itemListing():
 	form = newItem()
 	if form.validate_on_submit():
+		post = Post(itemName=form.itemName.data, description=form.description.data, itemPrice=form.itemPrice.data, itemPic = form.itemPic, author=current_user)
+		db.session.add(post)
+		db.session.commit()
 		flash('Item Listed!', 'success')
 		return redirect(url_for('home'))
 	return render_template("newItem.html", title="New Item Listing", form=form)
@@ -68,7 +71,8 @@ def itemListing():
 @app.route("/home")
 @app.route("/ads")
 def home():
-	return render_template("ads.html", title="SALES WOW")
+	posts = Post.query.all()
+	return render_template("ads.html", title="SALES WOW", posts=posts)
 
 
 @app.route("/logout")
