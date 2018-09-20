@@ -75,6 +75,69 @@ ul {
   padding: 0;
   margin: 0;
 }
+
+
+/*-------------------------------*/
+/*---     New Listing Form     --*/
+/*-------------------------------*/
+.newListing{
+  width: 450px;
+  padding: 25px;
+  margin-left: 75px;
+}
+.newListing h4{
+  font-family: 'RawlineRegular';
+  font-size: 14px;
+  color: darkslategray;
+  margin: 0 0 0 45px;
+  /*text-align: center; */
+}
+.newListing input, .newListing textarea{
+  border-radius: 10px;
+  border: 1px solid darkGray;
+  transition: 0.9s ease;
+  height: 25px;
+  width: 430px;
+  background-color: white;
+  padding: 10px 25px;
+  font-family: 'GlacialIndifferenceRegular';
+  font-size: 15px;
+}
+.newListing textarea{
+  height: 200px;
+  }
+.newListing>.listPrice{
+  width: 25px;
+}
+.newListing input[type="submit"]{
+  border:0.1em solid #FFFFFF;
+  border-radius: 5px;
+  margin:0 0.3em 0.3em 0;
+  border-radius:0.05em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-weight:300;
+  color:#FFFFFF;
+  background: rgba(0,0,0,0.7);
+  text-align:center;
+  transition: all 0.2s;
+  width: 240px;
+     /* margin-left: 35%; */
+     /* margin-right: 35%; */
+  margin-top: 25px;
+  margin-bottom: 5px;
+  height: 50px;
+  -webkit-transition: all 1s ease;
+  white-space: nowrap;
+}
+.newListing input[type="submit"]:hover{
+  background: rgba(0,0,0,0.9);
+  border-radius: 5px;
+}
+/*-------------------------------*/
+/*---                          --*/
+/*-------------------------------*/
+
 .left-body {
   grid-row: 2;
   grid-column: 2/4;
