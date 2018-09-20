@@ -1,4 +1,4 @@
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, abort
 from Application import app, db, bcrypt
 from Application.forms import RegistrationForm, LoginForm, UpdateInfo, newItem
 from Application.models import User, Post
@@ -110,3 +110,20 @@ def save_picture(form_picture):
 	i.thumbnail(output_size)
 	i.save(picture_path)
 	return picture_fn
+
+
+@app.route("/post/<int:post_id>")
+def post(post_id):
+	post = Post.query.get_or_404(post_id)
+	return render_template('listing.html', title=post.itemName, post=post)
+
+
+@app.route("/post/<int:post_id>")
+@login_required
+def update_post(post_id):
+	post = Post.query.get_or_404(post_id)
+	if post.author != current_user:
+		abort(403)
+	form = PostForm()
+	return render_template('listing.html', title='update_post', form=form)
+	
