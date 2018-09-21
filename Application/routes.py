@@ -64,12 +64,23 @@ def passretrieval(): #need a form
 def itemListing():
 	form = newItem()
 	if form.validate_on_submit():
-		post = Post(itemName=form.itemName.data, description=form.description.data, itemPrice=form.itemPrice.data, itemPic = form.itemPic.read(), author=current_user)
+		picture_file = save_pic(form.itemPic.data)
+		post = Post(itemName=form.itemName.data, description=form.description.data, itemPrice=form.itemPrice.data, author=current_user)
 		db.session.add(post)
 		db.session.commit()
 		flash('Item Listed!', 'success')
 		return redirect(url_for('home'))
 	return render_template("newItem.html", title="New Item Listing", form=form, legend='New Listing')
+
+def save_pic(form_picture, post_id):
+	_, f_ext = os.path.splitext(form_picture.filename)
+	picture_fn = post_id + f_ext
+	picture_path = os.path.join(app.root_path, 'static/listing_pics', picture_fn)
+	output_size = (500,500)
+	i = Image.open(form_picture)
+	i.thumbnail(output_size)
+	i.save(picture_path)
+	return picture_fn
 
 
 @app.route("/home")
