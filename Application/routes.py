@@ -15,7 +15,9 @@ from PIL import Image
 
 @app.route('/')
 def index():
-	return render_template('./index.html', name='App Title')
+	page = request.args.get('page', 1, type=int)
+	posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=2)
+	return render_template("./index.html", title="App Title", posts=posts)
 
 
 @app.route("/register", methods=['GET', "POST"])
