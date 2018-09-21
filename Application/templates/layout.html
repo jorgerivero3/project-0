@@ -20,11 +20,17 @@
 <body>
 	<div class="navBar">
 		<ul>
-		  <li class="titleNav"><a href="/">LaigsCrist</a></li>
-		  <!-- <li><a href="/home">Home</a></li> -->
+			
+		  {%if current_user.is_authenticated %}
+		  <li class="titleNav"><a href="/ads">LaigsCrist</a></li>
 		  <li><a href="/listings/new">List Item</a></li>
+		  <li><a href="/logout">Logout</a></li>
+		  {% else %}
+		  <li class="titleNav"><a href="/">LaigsCrist</a></li>
 		  <li><a href="/login">Login</a></li>
 		  <li><a href="/register">Register</a></li>
+		  {% endif %}
+
 
 		</ul>
 	</div>
