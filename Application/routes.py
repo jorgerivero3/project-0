@@ -81,7 +81,7 @@ def home():
 @app.route("/logout")
 def logout():
 	logout_user()
-	return redirect(url_for("home"))
+	return redirect(url_for("index"))
 
 
 @app.route("/account", methods=['GET', 'POST'])
