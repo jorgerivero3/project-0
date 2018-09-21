@@ -13,7 +13,7 @@ from PIL import Image
 #
 #app.before_request(before_request)
 
-@app.route('/')
+@app.route('/', methods=['GET', "POST"])
 def index():
 	page = request.args.get('page', 1, type=int)
 	posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=2)
