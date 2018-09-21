@@ -15,6 +15,8 @@ from PIL import Image
 
 @app.route('/', methods=['GET'])
 def index():
+	if current_user.is_authenticated:
+		return redirect(url_for('home'))
 	page = request.args.get('page', 1, type=int)
 	posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=2)
 	return render_template("./index.html", title="App Title", posts=posts)
