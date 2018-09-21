@@ -65,7 +65,7 @@ def itemListing():
 	form = newItem()
 	if form.validate_on_submit():
 		save_pic(form.itemPic.data)
-		post = Post(itemName=form.itemName.data, description=form.description.data, itemPrice=form.itemPrice.data, author=current_user)
+		post = Post(itemName=form.itemName.data, description=form.description.data, itemPrice=form.itemPrice.data, user_id=current_user)
 		db.session.add(post)
 		db.session.commit()
 		flash('Item Listed!', 'success')
