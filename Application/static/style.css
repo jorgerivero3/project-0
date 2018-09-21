@@ -64,12 +64,43 @@ small {
   font-family: 'GlacialIndifferenceRegular';
   font-size: 15px;
   color: darkslateblue;
+  margin: 25px 0 0 20px;
+}
+alert {
+  font-family: 'GlacialIndifferenceRegular';
+  font-size: 15px;
+  color: darkslateblue;
+}
+span {
+  font-family: 'GlacialIndifferenceRegular';
+  font-size: 15px;
+  color: darkslateblue;
   margin: 25px 0 0 15px;
+}
+a:visited {
+  text-decoration: none;
+  text-decoration-color: #33334d;
 }
 li {
   display: inline-block;
   padding: 0;
-  margin: 0 20px 0 0;
+  margin: 0 30px 0 0;
+  font-family: 'GlacialIndifferenceRegular';
+  font-size: 18px;
+  color: darkslategrey;
+}
+li:hover {
+  color: black;
+}
+.titleNav {
+  font-family: 'RawlineRegular';
+  font-size: 25px;
+  font-weight: bold;
+  color: black;
+}
+.buttonList {
+  margin: 0;
+  padding: 0;
 }
 ul {
   padding: 0;
@@ -151,8 +182,8 @@ ul {
 .button{
   border:0.1em solid #FFFFFF;
   border-radius: 5px;
-  margin:0 0.3em 0.3em 0;
-  border-radius:0.05em;
+  margin:0 0.3em 0 0;
+  padding: 0;
   box-sizing: border-box;
   text-decoration:none;
   font-weight:300;
@@ -163,8 +194,8 @@ ul {
   width: 240px;
      /* margin-left: 35%; */
      /* margin-right: 35%; */
-  margin-top: 25px;
-  margin-bottom: 5px;
+  /* margin-top: 25px; */
+  margin-bottom: 10px;
   height: 50px;
   -webkit-transition: all 1s ease;
   white-space: nowrap;
@@ -179,6 +210,9 @@ a {
 }
 .theForm {
   margin: 3% 0 0 10%;
+}
+.navBar {
+  /* background: rgba(0,0,0,0.7); */
 }
 input {
   border: none;

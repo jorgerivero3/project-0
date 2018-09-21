@@ -20,8 +20,8 @@
 <body>
 	<div class="navBar">
 		<ul>
-		  <li><a href="/">LaigsCrist</a></li>
-		  <li><a href="/home">Home</a></li>
+		  <li class="titleNav"><a href="/">LaigsCrist</a></li>
+		  <!-- <li><a href="/home">Home</a></li> -->
 		  <li><a href="/listings/new">List Item</a></li>
 		  <li><a href="/login">Login</a></li>
 		  <li><a href="/register">Register</a></li>
@@ -33,7 +33,7 @@
 		{% if messages %}
 			{% for catergory, message in messages %}
 				<div class = "alert alert-{{ category }}">
-					{{ message }}
+					<p>{{ message }}</p>
 			{% endfor %}
 		{% endif %}
 	{% endwith %}

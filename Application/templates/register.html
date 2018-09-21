@@ -5,8 +5,6 @@
   <div class='theForm'>
         <form method="POST" action="/register">
             {{ form.hidden_tag() }}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Join Today</legend>
                 <div class="form-group">
 
                     {% if form.username.errors %}
@@ -56,7 +54,7 @@
                         {{ form.confirm_password(class="form-control form-control-lg", placeholder='Confirm Password') }}
                     {% endif %}
                 </div>
-            </fieldset>
+                <br><br>
             <div class="form-group">
                 {{ form.submit(class="button") }}
             </div>
@@ -67,7 +65,7 @@
    </div>
   <!-- <div class="border-top pt-3"> -->
     <small>
-      Already have an account? <a class="ml-2" href="{{ url_for('login') }}">Login</a>
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Already have an account? <a class="ml-2" href="{{ url_for('login') }}">Login</a>
     </small>
   </div>
   <script src="./static/script.js"></script>
