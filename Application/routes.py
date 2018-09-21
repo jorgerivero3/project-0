@@ -64,7 +64,7 @@ def passretrieval(): #need a form
 def itemListing():
 	form = newItem()
 	if form.validate_on_submit():
-		picture_file = save_pic(form.itemPic.data)
+		save_pic(form.itemPic.data)
 		post = Post(itemName=form.itemName.data, description=form.description.data, itemPrice=form.itemPrice.data, author=current_user)
 		db.session.add(post)
 		db.session.commit()
@@ -80,7 +80,7 @@ def save_pic(form_picture, post_id):
 	i = Image.open(form_picture)
 	i.thumbnail(output_size)
 	i.save(picture_path)
-	return picture_fn
+	return
 
 
 @app.route("/home")
