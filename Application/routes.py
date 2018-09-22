@@ -96,9 +96,14 @@ def logout():
 	return redirect(url_for("index"))
 
 
-@app.route("/account", methods=['GET', 'POST'])
+@app.route("/account")
 @login_required
 def account():
+	return render_template('account.html', title="Account")
+
+@app.route("/updateInfo", methods=['GET', 'POST'])
+@login_required
+def updateInfo():
 	form = UpdateInfo()
 	if form.validate_on_submit():
 		if form.picture.data:
@@ -114,6 +119,7 @@ def account():
 		form.email.data = current_user.email
 	image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
 	return render_template('account.html', title="Account", image_file=image_file, form=form)
+
 
 def save_picture(form_picture):
 	random_hex = secrets.token_hex(8)
