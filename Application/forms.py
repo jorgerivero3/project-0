@@ -11,7 +11,6 @@ class RegistrationForm(FlaskForm):
 	email = StringField("Email", validators=[DataRequired(), Email()])
 	password = PasswordField("Password", validators=[DataRequired()])
 	confirm_password = PasswordField("Confirm Password", validators=[DataRequired(), EqualTo('password')])
-	picture = FileField('Update Pic', validators=[FileAllowed(['jpeg', 'png'])])
 	submit = SubmitField('Sign Up')
 
 	def validate_username(self, username):
@@ -43,6 +42,7 @@ class newItem(FlaskForm):
 class UpdateInfo(FlaskForm):
 	username = StringField("Username", validators=[DataRequired(), Length(min=2, max=20)])
 	email = StringField("Email", validators=[DataRequired(), Email()])
+	picture = FileField('Update Pic', validators=[FileAllowed(['jpeg', 'png'])])
 	submit = SubmitField('Update Info')
 
 	def validate_username(self, username):
