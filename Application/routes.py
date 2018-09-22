@@ -64,7 +64,7 @@ def passretrieval(): #need a form
 def itemListing():
 	form = newItem()
 	if form.validate_on_submit():
-		post = Post(itemName=form.itemName.data, description=form.description.data, itemPrice=form.itemPrice.data, user_id=current_user)
+		post = Post(itemName=form.itemName.data, description=form.description.data, itemPrice=form.itemPrice.data, author=current_user)
 		#save_pic(form.itemPic.data, post.id)
 		db.session.add(post)
 		db.session.commit()
