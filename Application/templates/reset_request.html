@@ -1,51 +1,53 @@
-<!DOCTYPE html>
-<html>
-<head>
+{% extends "layout.html" %}
+{% block content %}
 
-	<!--  Meta  -->
-	<meta charset="UTF-8" />
-	<title>LaigsCrist: Sell your stuff</title>
-	<meta name="description" content="Sell your stuff online."
-	<!--  Styles  -->
-	<link type="text/css" rel="stylesheet" href="{{url_for('static', filename='style.css') }}" />
-	<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/rawline" type="text/css"/>
-	<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/glacial-indifference" type="text/css"/>
+  <h3>Login</h3>
+  <div class='Reset Password'>
+        <form method="POST" action="/login">
+            {{ form.hidden_tag() }}
+                <!-- <legend class="border-bottom mb-4">Login</legend> -->
+                
+                <div class="form-group">
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid", placeholder='Email') }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg", placeholder='Email') }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-lg is-invalid", placeholder='Password') }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form-control form-control-lg", placeholder='Password') }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.remember.label }}
+                    {{ form.remember }}
+                </div
+             <br><br>   
+            <div class="form-group">
+                {{ form.submit(class="button") }}
+            </div>
+        </form>
 
-	<!-- Title -->
-	{% if title %}
-		<title>{{ title }}</title>
-	{% else %}
-		<title>LaigsCrist</title>
-	{% endif %}
-</head>
-<body>
-	<div class="navBar">
-		<ul>
-			
-		  {%if current_user.is_authenticated %}
-		  <li class="titleNav"><a href="/ads">LaigsCrist</a></li>
-		  <li><a href="/listings/new">List Item</a></li>
-		  <li><a href="/logout">Logout</a></li>
-		  {% else %}
-		  <li class="titleNav"><a href="/">LaigsCrist</a></li>
-		  <li><a href="/login">Login</a></li>
-		  <li><a href="/register">Register</a></li>
-		  {% endif %}
 
 
-		</ul>
-	</div>
-	
-	{% with messages = get_flashed_messages(with_categories=true) %}
-		{% if messages %}
-			{% for catergory, message in messages %}
-				<div class = "alert alert-{{ category }}">
-					<p>{{ message }}</p>
-			{% endfor %}
-		{% endif %}
-	{% endwith %}
-	
-	{% block content %}{% endblock %}
-
-</body>
-</html>
+   </div>
+  <!-- <div class="border-top pt-3"> -->
+    <small>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Don't have an account? <a href="/register">Register</a></small><br>
+    <small><a href="/password_retrieval">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Forgot your password?</a></small>
+  </div>
+  <script src="./static/script.js"></script>
+  
+  {% endblock content %}
