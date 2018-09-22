@@ -75,7 +75,6 @@ def itemListing():
 		return redirect(url_for('home'))
 	return render_template("newItem.html", title="New Item Listing", form=form, legend='New Listing')
 
-"""
 def save_pic(form_picture, post_id):
 	_, f_ext = os.path.splitext(form_picture.filename)
 	picture_fn = post_id + f_ext
@@ -85,7 +84,6 @@ def save_pic(form_picture, post_id):
 	i.thumbnail(output_size)
 	i.save(picture_path)
 	return
-"""
 
 
 @app.route("/home")
