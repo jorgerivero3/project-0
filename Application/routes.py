@@ -17,9 +17,10 @@ from PIL import Image
 def index():
 	if current_user.is_authenticated:
 		return redirect(url_for('home'))
+	full_filename = os.path.join(app.config["UPLOAD_FOLDER"], 'default.png')
 	page = request.args.get('page', 1, type=int)
 	posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=2)
-	return render_template("./index.html", title="App Title", posts=posts)
+	return render_template("./index.html", title="App Title", posts=posts, user_image = full_filename)
 
 
 @app.route("/register", methods=['GET', "POST"])
@@ -64,7 +65,8 @@ def passretrieval(): #need a form
 def itemListing():
 	form = newItem()
 	if form.validate_on_submit():
-		post = Post(itemName=form.itemName.data, description=form.description.data, itemPrice=form.itemPrice.data, author=current_user)
+		post = Post(itemName=form.itemName.data, description=form.description.data, itemPrice=form.itemPrice.data, user=current_user.id)
+		print(post)
 		#save_pic(form.itemPic.data, post.id)
 		db.session.add(post)
 		db.session.commit()
