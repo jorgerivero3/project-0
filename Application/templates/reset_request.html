@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<!--  Meta  -->
+	<meta charset="UTF-8" />
+	<title>LaigsCrist: Sell your stuff</title>
+	<meta name="description" content="Sell your stuff online."
+	<!--  Styles  -->
+	<link type="text/css" rel="stylesheet" href="{{url_for('static', filename='style.css') }}" />
+	<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/rawline" type="text/css"/>
+	<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/glacial-indifference" type="text/css"/>
+
+	<!-- Title -->
+	{% if title %}
+		<title>{{ title }}</title>
+	{% else %}
+		<title>LaigsCrist</title>
+	{% endif %}
+</head>
+<body>
+	<div class="navBar">
+		<ul>
+			
+		  {%if current_user.is_authenticated %}
+		  <li class="titleNav"><a href="/ads">LaigsCrist</a></li>
+		  <li><a href="/listings/new">List Item</a></li>
+		  <li><a href="/logout">Logout</a></li>
+		  {% else %}
+		  <li class="titleNav"><a href="/">LaigsCrist</a></li>
+		  <li><a href="/login">Login</a></li>
+		  <li><a href="/register">Register</a></li>
+		  {% endif %}
+
+
+		</ul>
+	</div>
+	
+	{% with messages = get_flashed_messages(with_categories=true) %}
+		{% if messages %}
+			{% for catergory, message in messages %}
+				<div class = "alert alert-{{ category }}">
+					<p>{{ message }}</p>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+	
+	{% block content %}{% endblock %}
+
+</body>
+</html>
