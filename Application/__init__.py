@@ -9,7 +9,7 @@ PEOPLE_FOLDER = os.path.join('static', 'profile_pics')
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'c435bd07880364149cdf9661f1994db4'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://N_A:kendrick8@project-0.c7ixro14gllf.us-east-2.rds.amazonaws.com/LaigsCrist'
 app.config['UPLOAD_FOLDER'] = PEOPLE_FOLDER
 
 db = SQLAlchemy(app)
