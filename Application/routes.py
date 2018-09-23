@@ -19,7 +19,7 @@ from flask_mail import Message
 def index():
 	if current_user.is_authenticated:
 		return redirect(url_for('home'))
-	full_filename = os.path.join(app.config["UPLOAD_FOLDER"], 'default.png')
+	full_filename = os.path.join(application.config["UPLOAD_FOLDER"], 'default.png')
 	page = request.args.get('page', 1, type=int)
 	posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=2)
 	return render_template("./index.html", title="App Title", posts=posts, user_image = full_filename)
