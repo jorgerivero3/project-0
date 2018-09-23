@@ -1,5 +1,5 @@
 from flask import render_template, url_for, flash, redirect, request, abort
-from Application import app, db, bcrypt, mail
+from Application import application, db, bcrypt, mail
 from Application.forms import (RegistrationForm, LoginForm, UpdateInfo, newItem, 
 								RequestResetForm, ResetPasswordForm)
 from Application.models import User, Post
@@ -15,7 +15,7 @@ from flask_mail import Message
 #
 #app.before_request(before_request)
 
-@app.route('/', methods=['GET'])
+@application.route('/', methods=['GET'])
 def index():
 	if current_user.is_authenticated:
 		return redirect(url_for('home'))
@@ -25,7 +25,7 @@ def index():
 	return render_template("./index.html", title="App Title", posts=posts, user_image = full_filename)
 
 
-@app.route("/register", methods=['GET', "POST"])
+@application.route("/register", methods=['GET', "POST"])
 def register():
 	if current_user.is_authenticated:
 		return redirect(url_for('home'))
@@ -41,7 +41,7 @@ def register():
 	return render_template("register.html", title="Register", form=form)
 
 
-@app.route("/login", methods=['GET', 'POST'])
+@application.route("/login", methods=['GET', 'POST'])
 def login():
 	if current_user.is_authenticated:
 		return redirect(url_for('home'))
@@ -57,7 +57,7 @@ def login():
 	return render_template('login.html', title="Login", form=form)
 
 
-@app.route("/listings/new", methods=['GET', 'POST'])
+@application.route("/listings/new", methods=['GET', 'POST'])
 @login_required
 def itemListing():
 	form = newItem()
@@ -81,27 +81,27 @@ def save_pic(form_picture, post_id, extension):
 	return picture_fn
 
 
-@app.route("/home")
-@app.route("/ads")
+@application.route("/home")
+@application.route("/ads")
 def home():
 	page = request.args.get('page', 1, type=int)
 	posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
 	return render_template("ads.html", title="SALES WOW", posts=posts)
 
 
-@app.route("/logout")
+@application.route("/logout")
 def logout():
 	logout_user()
 	return redirect(url_for("index"))
 
 
-@app.route("/account")
+@application.route("/account")
 @login_required
 def account():
 	image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
 	return render_template('account.html', title="Account", image_file=image_file)
 
-@app.route("/updateInfo", methods=['GET', 'POST'])
+@application.route("/updateInfo", methods=['GET', 'POST'])
 @login_required
 def updateInfo():
 	form = UpdateInfo()
@@ -133,13 +133,13 @@ def save_picture(form_picture):
 	return picture_fn
 
 
-@app.route("/post/<int:post_id>")
+@application.route("/post/<int:post_id>")
 def post(post_id):
 	post = Post.query.get_or_404(post_id)
 	return render_template('listing.html', title=post.itemName, post=post)
 
 
-@app.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
+@application.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
 @login_required
 def update_post(post_id):
 	post = Post.query.get_or_404(post_id)
@@ -162,7 +162,7 @@ def update_post(post_id):
 	return render_template('listing.html', title='update_post', form=form, legend='Update Post')
 
 
-@app.route("/post/<int:post_id>/delete", methods=['POST'])
+@application.route("/post/<int:post_id>/delete", methods=['POST'])
 @login_required
 def delete_post(post_id):
 	post = Post.query.get_or_404(post_id)
@@ -174,7 +174,7 @@ def delete_post(post_id):
 	return redirect(url_for('home'))
 
 
-@app.route("/user/<string:username>")
+@application.route("/user/<string:username>")
 def user_posts(username):
 	page = request.args.get('page', 1, type=int)
 	user = User.query.filter_by(username=username).first_or_404()
@@ -185,7 +185,7 @@ def user_posts(username):
 	return render_template('user_posts.html', posts=posts, user=user, image_file=image_file)
 
 
-@app.route("/password_retrieval")
+@application.route("/password_retrieval")
 def passretrieval(): #need a form
 	return render_template("password_retrieval.html", title="Get your password back")
 
@@ -200,7 +200,7 @@ paste it into your web browser:
 If you did not make this request then please ignore this email.
 	'''
 
-@app.route("/reset_password", methods=['GET', 'POST'])
+@application.route("/reset_password", methods=['GET', 'POST'])
 def reset_request():
 	if current_user.is_authenticated:
 		return redirect(url_for('home'))
@@ -213,7 +213,7 @@ def reset_request():
 	return render_template('reset_request.html', title='Reset Password', form=form)
 
 
-@app.route("/reset_password/<token>", methods=['GET', 'POST'])
+@application.route("/reset_password/<token>", methods=['GET', 'POST'])
 def reset_token(token):
 	if current_user.is_authenticated:
 		return redirect(url_for('home'))
