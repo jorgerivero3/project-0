@@ -63,10 +63,9 @@ def itemListing():
 	form = newItem()
 	if form.validate_on_submit():
 		post = Post(itemName=form.itemName.data, description=form.description.data, itemPrice=form.itemPrice.data, user=current_user.id)
-		print(post)
-		save_pic(form.itemPic.data, post.id)
 		db.session.add(post)
 		db.session.commit()
+		save_pic(form.itemPic.data, str(post.id))
 		flash('Item Listed!', 'success')
 		return redirect(url_for('home'))
 	return render_template("newItem.html", title="New Item Listing", form=form, legend='New Listing')

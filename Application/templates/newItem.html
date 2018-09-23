@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="newListing">
-  <form method="POST" action="/listings/new">
+  <form method="POST" action="/listings/new" enctype="multipart/form-data">
     <h2>New Item Listing</h2>
     {{ form.hidden_tag() }}
     <div class="form-group">

@@ -33,7 +33,7 @@ class LoginForm(FlaskForm):
 	
 class newItem(FlaskForm):
 	itemName = StringField("Name of listed item", validators=[DataRequired(), Length(min=2, max=20)])
-	itemPic = FileField("Image of item", validators=[FileRequired(['jpeg', 'png'])])
+	itemPic = FileField("Image of item", validators=[FileRequired('Image Required'), FileAllowed(['jpg', 'png'], "jpg and png only")])
 	description = TextAreaField("Item description", validators=[DataRequired(), Length(max=750)])
 	itemPrice = IntegerField("Price",validators=[DataRequired(), NumberRange(min=0, max=100000)])
 	submit = SubmitField('List Item')
@@ -42,7 +42,7 @@ class newItem(FlaskForm):
 class UpdateInfo(FlaskForm):
 	username = StringField("Username", validators=[DataRequired(), Length(min=2, max=20)])
 	email = StringField("Email", validators=[DataRequired(), Email()])
-	picture = FileField('Update Pic', validators=[FileAllowed(['jpeg', 'png'])])
+	picture = FileField('Update Pic', validators=[FileAllowed(['jpg', 'png'])])
 	submit = SubmitField('Update Info')
 
 	def validate_username(self, username):
