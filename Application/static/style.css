@@ -25,7 +25,7 @@ h1 {
 }
 h2 {
   font-family: 'RawlineRegular';
-  font-size: 22px;
+  font-size: 20px;
   color: #33334d;
   font-weight: lighter;
 }
@@ -178,6 +178,9 @@ ul {
   grid-column: 4/6;
   border: 2px solid;
   border-radius: 5px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 .button{
   border:0.1em solid #FFFFFF;
