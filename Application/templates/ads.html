@@ -13,9 +13,8 @@
                 <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
               </div>
               <h2><a class="article-title" href="{{ url_for('post', post_id=post.id) }}">{{ post.itemName }}</a></h2>
-              <p class="article-content">{{ post.itemPrice }}</p>
-              <p class="article-content">{{ post.description }}</p>
-              <!-- need pic here -->
+              <img class="" src="{{ url_for('static', filename='listing_pics/' + post.id|string + '.jpg') }}">
+              <p class="article-content">${{ post.itemPrice }}</p>
               <br>
             </div>
           </div>
