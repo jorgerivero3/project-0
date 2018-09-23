@@ -3,6 +3,7 @@
     {% for post in posts.items %}
         <article class="media content-section">
           <div class="media-body"
+          <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
             <div class="article-metadata">
               {{ post.itemName }}
               <a class="mr-2" href="{{ url_for('user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
