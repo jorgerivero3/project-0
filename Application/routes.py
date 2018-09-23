@@ -19,7 +19,7 @@ from flask_mail import Message
 def index():
 	if current_user.is_authenticated:
 		return redirect(url_for('home'))
-	full_filename = os.path.join(app.config["UPLOAD_FOLDER"], 'default.png')
+	full_filename = os.path.join(application.config["UPLOAD_FOLDER"], 'default.png')
 	page = request.args.get('page', 1, type=int)
 	posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=2)
 	return render_template("./index.html", title="App Title", posts=posts, user_image = full_filename)
@@ -73,7 +73,7 @@ def itemListing():
 
 def save_pic(form_picture, post_id, extension):
 	picture_fn = post_id + extension
-	picture_path = os.path.join(app.root_path, 'static/listing_pics', picture_fn)
+	picture_path = os.path.join(application.root_path, 'static/listing_pics', picture_fn)
 	output_size = (500,500)
 	i = Image.open(form_picture)
 	i.thumbnail(output_size)
@@ -125,7 +125,7 @@ def save_picture(form_picture):
 	random_hex = secrets.token_hex(8)
 	_, f_ext = os.path.splitext(form_picture.filename)
 	picture_fn = random_hex + f_ext
-	picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn)
+	picture_path = os.path.join(application.root_path, 'static/profile_pics', picture_fn)
 	output_size = (125,125)
 	i = Image.open(form_picture)
 	i.thumbnail(output_size)
