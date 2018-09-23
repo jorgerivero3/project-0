@@ -1,11 +1,13 @@
 from flask import render_template, url_for, flash, redirect, request, abort
-from Application import app, db, bcrypt
-from Application.forms import RegistrationForm, LoginForm, UpdateInfo, newItem
+from Application import app, db, bcrypt, mail
+from Application.forms import (RegistrationForm, LoginForm, UpdateInfo, newItem, 
+								RequestResetForm, ResetPasswordForm)
 from Application.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 import secrets
 import os
 from PIL import Image
+from flask_mail import Message
 
 #what do these lines do?
 #def before_request():
@@ -17,9 +19,10 @@ from PIL import Image
 def index():
 	if current_user.is_authenticated:
 		return redirect(url_for('home'))
+	full_filename = os.path.join(app.config["UPLOAD_FOLDER"], 'default.png')
 	page = request.args.get('page', 1, type=int)
 	posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=2)
-	return render_template("./index.html", title="App Title", posts=posts)
+	return render_template("./index.html", title="App Title", posts=posts, user_image = full_filename)
 
 
 @app.route("/register", methods=['GET', "POST"])
@@ -54,20 +57,15 @@ def login():
 	return render_template('login.html', title="Login", form=form)
 
 
-@app.route("/password_retrieval")
-def passretrieval(): #need a form
-	return render_template("password_retrieval.html", title="Get your password back")
-
-
 @app.route("/listings/new", methods=['GET', 'POST'])
 @login_required
 def itemListing():
 	form = newItem()
 	if form.validate_on_submit():
-		save_pic(form.itemPic.data)
-		post = Post(itemName=form.itemName.data, description=form.description.data, itemPrice=form.itemPrice.data, user_id=current_user)
+		post = Post(itemName=form.itemName.data, description=form.description.data, itemPrice=form.itemPrice.data, user=current_user.id)
 		db.session.add(post)
 		db.session.commit()
+		save_pic(form.itemPic.data, str(post.id))
 		flash('Item Listed!', 'success')
 		return redirect(url_for('home'))
 	return render_template("newItem.html", title="New Item Listing", form=form, legend='New Listing')
@@ -97,9 +95,15 @@ def logout():
 	return redirect(url_for("index"))
 
 
-@app.route("/account", methods=['GET', 'POST'])
+@app.route("/account")
 @login_required
 def account():
+	image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
+	return render_template('account.html', title="Account", image_file=image_file)
+
+@app.route("/updateInfo", methods=['GET', 'POST'])
+@login_required
+def updateInfo():
 	form = UpdateInfo()
 	if form.validate_on_submit():
 		if form.picture.data:
@@ -114,7 +118,8 @@ def account():
 		form.username.data = current_user.username
 		form.email.data = current_user.email
 	image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
-	return render_template('account.html', title="Account", image_file=image_file, form=form)
+	return render_template('updateInfo.html', title="Account", image_file=image_file, form=form)
+
 
 def save_picture(form_picture):
 	random_hex = secrets.token_hex(8)
@@ -173,7 +178,54 @@ def delete_post(post_id):
 def user_posts(username):
 	page = request.args.get('page', 1, type=int)
 	user = User.query.filter_by(username=username).first_or_404()
+	image_file = url_for('static', filename='profile_pics/' + user.image_file)
 	posts = Post.query.filter_by(author=user)\
 	.order_by(Post.date_posted.desc())\
 	.paginate(page=page, per_page=5)
-	return render_template('user_posts.html', posts=posts, user=user)
+	return render_template('user_posts.html', posts=posts, user=user, image_file=image_file)
+
+
+@app.route("/password_retrieval")
+def passretrieval(): #need a form
+	return render_template("password_retrieval.html", title="Get your password back")
+
+
+def send_reset_email(user):
+	token = user.get_reset_token()
+	msg = Message('Password Reset Request', sender='noreply@utexas.edu', recipients=[user.email])
+	msd.body = f''' To reset your password, click the following link, or copy and
+paste it into your web browser:
+{url_for('reset_token', token=token, _external=True)}
+
+If you did not make this request then please ignore this email.
+	'''
+
+@app.route("/reset_password", methods=['GET', 'POST'])
+def reset_request():
+	if current_user.is_authenticated:
+		return redirect(url_for('home'))
+	form = RequestResetForm()
+	if form.validate_on_submit():
+		user = User.query.filter_by(email=form.email.data).first()
+		send_reset_email(user)
+		flash('An email has been sent with instructions to reset your password', 'info')
+		return redirect(url_for('login'))
+	return render_template('reset_request.html', title='Reset Password', form=form)
+
+
+@app.route("/reset_password/<token>", methods=['GET', 'POST'])
+def reset_token(token):
+	if current_user.is_authenticated:
+		return redirect(url_for('home'))
+	user = User.verify_reset_token(token)
+	if user is None:
+		flash('The reset token you are using is invalid or expired.')
+		return redirect(url_for('password_retrieval'))
+	form = ResetPasswordForm()
+	if form.validate_on_submit():
+		hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+		user.password = hashed_password
+		db.session.commit()
+		flash('Password has been updated.', 'success')
+		return redirect(url_for('login'))
+	return render_template('reset_token.html', title='Reset Password', form=form)
