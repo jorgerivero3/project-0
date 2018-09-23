@@ -78,7 +78,7 @@ def save_pic(form_picture, post_id):
 	i = Image.open(form_picture)
 	i.thumbnail(output_size)
 	i.save(picture_path)
-	return
+	return picture_fn
 
 
 @app.route("/home")

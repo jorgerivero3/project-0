@@ -169,6 +169,25 @@ ul {
 /*---                          --*/
 /*-------------------------------*/
 
+
+.adPost{
+  margin-left: 25px;
+  width: 400px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.adPost .adProfPic{
+  height:50px; 
+  width:50px; 
+  float:left; 
+  padding-right: 20px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+
+
 .left-body {
   grid-row: 2;
   grid-column: 2/4;
