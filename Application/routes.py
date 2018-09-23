@@ -62,7 +62,7 @@ def login():
 def itemListing():
 	form = newItem()
 	if form.validate_on_submit():
-		_, f_ext = os.path.splitext(form_picture.filename)
+		_, f_ext = os.path.splitext(form.itemPic.data.filename)
 		post = Post(itemName=form.itemName.data, description=form.description.data, itemPrice=form.itemPrice.data, user=current_user.id, ext=f_ext)
 		db.session.add(post)
 		db.session.commit()
