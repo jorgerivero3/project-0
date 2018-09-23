@@ -8,12 +8,11 @@
             <img class="adProfPic" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
               <br>
               <div class="article-metadata">
-                {{ post.itemName }}
                 <a class="mr-2" href="{{ url_for('user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
                 <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
               </div>
               <h2><a class="article-title" href="{{ url_for('post', post_id=post.id) }}">{{ post.itemName }}</a></h2>
-              <img class="" src="{{ url_for('static', filename='listing_pics/' + post.id|string + post.ext) }}">
+              <img class="listpic" src="{{ url_for('static', filename='listing_pics/' + post.id|string + post.ext) }}">
               <p class="article-content">${{ post.itemPrice }}</p>
               <br>
             </div>

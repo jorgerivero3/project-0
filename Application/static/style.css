@@ -186,7 +186,10 @@ ul {
   margin-top: 10px;
 }
 
-
+.listpic{
+  overflow: hidden;
+  max-width: 250px;
+}
 
 .left-body {
   grid-row: 2;
