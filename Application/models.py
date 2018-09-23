@@ -42,6 +42,7 @@ class Post(db.Model):
 	description = db.Column(db.String(750), nullable=False)
 	date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 	itemPrice = db.Column(db.Integer, nullable=False)
+	ext = db.Column(db.String(3), nullable=False)
 	user = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 	
 	def __repr__(self):

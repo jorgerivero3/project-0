@@ -62,17 +62,17 @@ def login():
 def itemListing():
 	form = newItem()
 	if form.validate_on_submit():
-		post = Post(itemName=form.itemName.data, description=form.description.data, itemPrice=form.itemPrice.data, user=current_user.id)
+		_, f_ext = os.path.splitext(form_picture.filename)
+		post = Post(itemName=form.itemName.data, description=form.description.data, itemPrice=form.itemPrice.data, user=current_user.id, ext=f_ext)
 		db.session.add(post)
 		db.session.commit()
-		save_pic(form.itemPic.data, str(post.id))
+		save_pic(form.itemPic.data, str(post.id), f_ext)
 		flash('Item Listed!', 'success')
 		return redirect(url_for('home'))
 	return render_template("newItem.html", title="New Item Listing", form=form, legend='New Listing')
 
-def save_pic(form_picture, post_id):
-	_, f_ext = os.path.splitext(form_picture.filename)
-	picture_fn = post_id + f_ext
+def save_pic(form_picture, post_id, extension):
+	picture_fn = post_id + extension
 	picture_path = os.path.join(app.root_path, 'static/listing_pics', picture_fn)
 	output_size = (500,500)
 	i = Image.open(form_picture)
