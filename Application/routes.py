@@ -22,7 +22,7 @@ def index():
 	full_filename = os.path.join(application.config["UPLOAD_FOLDER"], 'default.png')
 	page = request.args.get('page', 1, type=int)
 	posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=2)
-	return render_template("./index.html", title="App Title", posts=posts, user_image = full_filename)
+	return render_template("/index.html", title="App Title", posts=posts, user_image = full_filename)
 
 
 @application.route("/register", methods=['GET', "POST"])
@@ -86,7 +86,7 @@ def save_pic(form_picture, post_id, extension):
 def home():
 	page = request.args.get('page', 1, type=int)
 	posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
-	return render_template("ads.html", title="SALES WOW", posts=posts)
+	return render_template("ads.html", title="Ads Listings", posts=posts)
 
 
 @application.route("/logout")
@@ -118,7 +118,7 @@ def updateInfo():
 		form.username.data = current_user.username
 		form.email.data = current_user.email
 	image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
-	return render_template('updateInfo.html', title="Account", image_file=image_file, form=form)
+	return render_template('updateInfo.html', title="Update your Information", image_file=image_file, form=form)
 
 
 def save_picture(form_picture):
@@ -136,7 +136,7 @@ def save_picture(form_picture):
 @application.route("/post/<int:post_id>")
 def post(post_id):
 	post = Post.query.get_or_404(post_id)
-	return render_template('listing.html', title=post.itemName, post=post)
+	return render_template('post.html', title=post.itemName, post=post)
 
 
 @application.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
@@ -159,7 +159,7 @@ def update_post(post_id):
 		form.description.data = post.description
 		form.itemPrice.data = post.itemPrice
 		form.itemPic.data = post.itemPic
-	return render_template('listing.html', title='update_post', form=form, legend='Update Post')
+	return render_template('listing.html', title='Update your Post', form=form, legend='Update Post')
 
 
 @application.route("/post/<int:post_id>/delete", methods=['POST'])
@@ -185,22 +185,17 @@ def user_posts(username):
 	return render_template('user_posts.html', posts=posts, user=user, image_file=image_file)
 
 
-@application.route("/password_retrieval")
-def passretrieval(): #need a form
-	return render_template("password_retrieval.html", title="Get your password back")
-
-
 def send_reset_email(user):
 	token = user.get_reset_token()
 	msg = Message('Password Reset Request', sender='noreply@utexas.edu', recipients=[user.email])
-	msd.body = f''' To reset your password, click the following link, or copy and
+	msg.body = f''' To reset your password, click the following link, or copy and
 paste it into your web browser:
 {url_for('reset_token', token=token, _external=True)}
 
 If you did not make this request then please ignore this email.
 	'''
 
-@application.route("/reset_password", methods=['GET', 'POST'])
+@application.route("/reset_request", methods=['GET', 'POST'])
 def reset_request():
 	if current_user.is_authenticated:
 		return redirect(url_for('home'))

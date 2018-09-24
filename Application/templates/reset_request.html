@@ -1,9 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
 
-  <h3>Login</h3>
-  <div class='Reset Password'>
-        <form method="POST" action="/login">
+  <h3>Password Retrieval</h3>
+  <h6>Enter your email and we'll send you a new password.</h6>
+  <div class='theForm'>
+        <form method="POST" action="/reset_request">
             {{ form.hidden_tag() }}
                 <!-- <legend class="border-bottom mb-4">Login</legend> -->
                 
@@ -19,34 +20,13 @@
                         {{ form.email(class="form-control form-control-lg", placeholder='Email') }}
                     {% endif %}
                 </div>
-                <div class="form-group">
-                    {% if form.password.errors %}
-                        {{ form.password(class="form-control form-control-lg is-invalid", placeholder='Password') }}
-                        <div class="invalid-feedback">
-                            {% for error in form.password.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.password(class="form-control form-control-lg", placeholder='Password') }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.remember.label }}
-                    {{ form.remember }}
-                </div
              <br><br>   
             <div class="form-group">
                 {{ form.submit(class="button") }}
             </div>
         </form>
+    <small>Don't have an account? <a href="/register">Register</a></small><br>
 
-
-
-   </div>
-  <!-- <div class="border-top pt-3"> -->
-    <small>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Don't have an account? <a href="/register">Register</a></small><br>
-    <small><a href="/password_retrieval">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Forgot your password?</a></small>
   </div>
   <script src="./static/script.js"></script>
   
