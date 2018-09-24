@@ -175,6 +175,12 @@ ul {
 /*---                          --*/
 /*-------------------------------*/
 
+.account-img{
+height: 125px;
+width: 125px;
+margin-right: 20px;
+margin-bottom: 16px;
+}
 
 .adPost{
   margin-left: 25px;
