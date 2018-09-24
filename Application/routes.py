@@ -195,7 +195,7 @@ paste it into your web browser:
 If you did not make this request then please ignore this email.
 	'''
 
-@application.route("/reset_request", methods=['GET', 'POST'])
+@application.route("/reset_password", methods=['GET', 'POST'])
 def reset_request():
 	if current_user.is_authenticated:
 		return redirect(url_for('home'))
