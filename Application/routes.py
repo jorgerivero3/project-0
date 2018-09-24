@@ -193,7 +193,7 @@ paste it into your web browser:
 {url_for('reset_token', token=token, _external=True)}
 
 If you did not make this request then please ignore this email.
-	'''
+'''
 
 @application.route("/reset_request", methods=['GET', 'POST'])
 def reset_request():
