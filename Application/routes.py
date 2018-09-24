@@ -187,7 +187,7 @@ def user_posts(username):
 
 def send_reset_email(user):
 	token = user.get_reset_token()
-	msg = Message('Password Reset Request', sender='noreply@utexas.edu', recipients=[user.email])
+	msg = Message('Password Reset Request', sender='noreply@demo.com', recipients=[user.email])
 	msg.body = f''' To reset your password, click the following link, or copy and
 paste it into your web browser:
 {url_for('reset_token', token=token, _external=True)}
