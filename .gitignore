@@ -1,7 +1,7 @@
 .idea 
 __pycache__
 venv
-my_env
+my-env
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
