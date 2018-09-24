@@ -194,6 +194,7 @@ paste it into your web browser:
 
 If you did not make this request then please ignore this email.
 '''
+	mail.send(msg)
 
 @application.route("/reset_request", methods=['GET', 'POST'])
 def reset_request():
