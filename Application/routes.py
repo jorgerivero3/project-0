@@ -136,7 +136,7 @@ def save_picture(form_picture):
 @application.route("/post/<int:post_id>")
 def post(post_id):
 	post = Post.query.get_or_404(post_id)
-	return render_template('listing.html', title=post.itemName, post=post)
+	return render_template('post.html', title=post.itemName, post=post)
 
 
 @application.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
