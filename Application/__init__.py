@@ -23,8 +23,8 @@ login_manager.login_message_category = 'info'
 application.config['MAIL_SERVER'] = 'smtp.googlemail.com'
 application.config['MAIL_PORT'] = 587
 application.config['MAIL_USE_TLS'] = True
-application.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER')
-application.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASS')
+application.config['MAIL_USERNAME'] = 'cs329efall18project0'
+application.config['MAIL_PASSWORD'] = 'texascompsci18'
 mail = Mail(application)
 
 from Application import routes
