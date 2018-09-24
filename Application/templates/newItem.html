@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="newListing">
+  <form method="POST" action="/listings/new" enctype="multipart/form-data">
+    <h2>New Item Listing</h2>
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        <h4>Item Name:</h4>
+        {{form.itemName}}
+    </div>
+    <div class="form-group">
+        <h4>Item Pic:</h4>
+        {{form.itemPic}}
+    </div>
+    <div class="form-group">
+        <h4>Item Description:</h4>
+        {{form.description}}
+    </div>
+    <div class="form-group">
+        <h4>Item Price:</h4>
+        {{form.itemPrice}}
+    </div>
+    <div class="form-group">
+        {{form.submit}}
+    </div>
+
+
+  </form>
+</div>
+
+{% endblock %}

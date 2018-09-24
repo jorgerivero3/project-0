@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+
+  <h3>Password Retrieval</h3>
+  <h6>Enter your email and we'll send you a new password.</h6>
+  <div class='theForm'>
+        <form method="POST" action="/reset_request">
+            {{ form.hidden_tag() }}
+                <!-- <legend class="border-bottom mb-4">Login</legend> -->
+                
+                <div class="form-group">
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid", placeholder='Email') }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg", placeholder='Email') }}
+                    {% endif %}
+                </div>
+             <br><br>   
+            <div class="form-group">
+                {{ form.submit(class="button") }}
+            </div>
+        </form>
+    <small>Don't have an account? <a href="/register">Register</a></small><br>
+
+  </div>
+  <script src="./static/script.js"></script>
+  
+  {% endblock content %}

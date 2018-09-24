@@ -1,0 +1,48 @@
+<!-- {% extends "layout.html" %} -->
+{% block content %}
+
+  <div class='theGrid'>
+     <div class='left-body'>
+        <h1>LaigsCrist</h1>
+        <h2>Sell your stuff online. <br>Totally original.</h2><br>
+
+
+        <!-- add routing stuff -->
+        
+        <div class='buttonList'>
+        <form method ="get" action = "/register"><button class ='button'>Register</button></form>
+        </div>
+        <div class='buttonList'>
+          <form method ="get" action = "/login"><button class ='button'>Login</button></form>
+        </div>
+        
+        
+        <p class='align-text-center'>or <a href="/ads">Continue as Guest</a></p>
+
+
+
+     </div>
+     <div class='right-body'>
+        <!-- feed goes here -->
+        <!-- {% for post in posts.items %}
+          <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{ user_image }}" style="width:125px;height:125px;">
+            <div class="media-body">
+              <div class="article-metadata">
+                <a class="mr-2" href="{{ url_for('user_posts', username=post.author.username) }}">{{ post.user.username }}</a>
+                <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+              </div>
+              <h2><a class="article-title" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
+              <p class="article-content">{{ post.description }}</p>
+            </div>
+          </article>
+        {% endfor %} -->
+        <!-- <img src="https://i.imgur.com/1RaJLdf.png" alt="feed" /> -->
+        <img src="https://image.ibb.co/ivvb2U/vinal.png" alt="feed">
+     </div>
+  </div>
+  
+ 
+  <script src="./static/script.js"></script>
+
+{% endblock %}
